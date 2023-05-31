@@ -2,7 +2,7 @@ terraform {
   backend "azurerm" {
     resource_group_name = "div-terraform-sf-backend"
     storage_account_name = "terraformsfbackend"
-    container_name = "value"
+    container_name = "tfstatefile"
     key = "dev.terraform.tfstate"
   }
   required_providers {
