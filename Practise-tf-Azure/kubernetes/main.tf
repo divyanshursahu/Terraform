@@ -38,3 +38,10 @@ resource "azurerm_kubernetes_cluster" "kubecluster" {
     type = "SystemAssigned"
   }
 }
+
+resource "azurerm_kubernetes_cluster_node_pool" "name" {
+  name = "user-node-pool"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.kubecluster.id
+  vm_size = "Standard_DS2_v2"
+  node_count = 2
+}
