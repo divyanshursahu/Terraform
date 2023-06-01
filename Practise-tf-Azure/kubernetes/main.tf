@@ -21,3 +21,15 @@ resource "azurerm_resource_group" "kubecluster" {
   name = "kubecluster"
   location = "West Europe"
 }
+
+resource "azurerm_kubernetes_cluster" "kubecluster" {
+  name = "test-kube-cluster"
+  location = "West Europe"
+  resource_group_name = azurerm_resource_group.kubecluster.name
+
+  default_node_pool {
+    name = "default"
+    node_count = 1
+    vm_size = "Standard_D2_v2"
+  }
+}
