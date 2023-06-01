@@ -40,7 +40,7 @@ resource "azurerm_kubernetes_cluster" "kubecluster" {
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "name" {
-  name = "user-node-pool"
+  name = "usernp"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.kubecluster.id
   vm_size = "Standard_DS2_v2"
   node_count = 2
