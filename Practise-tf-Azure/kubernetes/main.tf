@@ -26,6 +26,7 @@ resource "azurerm_kubernetes_cluster" "kubecluster" {
   name = "test-kube-cluster"
   location = "West Europe"
   resource_group_name = azurerm_resource_group.kubecluster.name
+  dns_prefix = "test-dns"
 
   default_node_pool {
     name = "default"
