@@ -32,4 +32,8 @@ resource "azurerm_kubernetes_cluster" "kubecluster" {
     node_count = 1
     vm_size = "Standard_D2_v2"
   }
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
