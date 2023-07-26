@@ -64,7 +64,8 @@ resource "azurerm_storage_blob" "env-file" {
   storage_account_name = azurerm_storage_account.storageacc3861919.name
   storage_container_name = azurerm_storage_container.container.name
   type = "Block"
-  source = "env_variable.cpgz"   #you can add your own file
-
+  source = "env_variable.cpgz"   
+  
+  #you can add your own file
   # if you dont mention the source this block will create a block with name filed as env_variable.cpgz
 }
