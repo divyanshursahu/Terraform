@@ -35,3 +35,4 @@ cerdentials.tfvars
 terraform.rc
 .terraform.lock.hcl
 env-file
+.DS_Store
