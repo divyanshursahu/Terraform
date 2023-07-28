@@ -38,9 +38,9 @@ resource "azurerm_virtual_network" "app-vnet" {
 
 resource "azurerm_subnet" "app-subnet" {
   name                 = local.subnets.name
-  address_prefixes     = [local.subnets.address_prefix]
   resource_group_name  = local.azurerm_resource_group
   virtual_network_name = azurerm_virtual_network.app-vnet.name
+  address_prefixes = [ local.subnets.address_space ]
 
   depends_on = [
     azurerm_resource_group.app-rg,
