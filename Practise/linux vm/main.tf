@@ -17,7 +17,7 @@ locals {
   location               = "West Europe"
   subnets = {
     name = "subnetA"
-  address_space = "10.0.0.0/24" }
+    address_space = "10.0.0.0/24" }
 }
 
 resource "azurerm_resource_group" "app-rg" {
@@ -37,11 +37,10 @@ resource "azurerm_virtual_network" "app-vnet" {
 }
 
 resource "azurerm_subnet" "app-subnet" {
-  name                 = local.subnets[0].name
-  address_prefixes     = [local.subnets[0].address_prefix]
+  name                 = local.subnets.name
+  address_prefixes     = [local.subnets.address_prefix]
   resource_group_name  = local.azurerm_resource_group
   virtual_network_name = azurerm_virtual_network.app-vnet.name
-  location = local.location
 
   depends_on = [
     azurerm_resource_group.app-rg,
