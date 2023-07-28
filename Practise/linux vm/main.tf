@@ -106,7 +106,7 @@ resource "azurerm_linux_virtual_machine" "app-vm" {
   name                = "${local.azurerm_resource_group}-vm"
   resource_group_name = local.azurerm_resource_group
   location            = local.location
-  size                = "Standard F2"
+  size                = "Standard_D1_v2"
   admin_username      = "azuser"
   network_interface_ids = [
     azurerm_network_interface.vm-nic.id,
