@@ -14,7 +14,7 @@ provider "azurerm" {
 
 locals {
   azurerm_resource_group = "app-rg"
-  location = "West Europer"
+  location = "West Europe"
 }
 
 resource "azurerm_resource_group" "app-rg" {
