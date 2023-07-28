@@ -38,13 +38,14 @@ resource "azurerm_virtual_network" "app-vnet" {
 
 resource "azurerm_subnet" "app-subnet" {
   name                 = local.subnets[0].name
-  address_prefixes     = [local.location[0].address_space]
+  address_prefixes     = [local.subnets[0].address_prefix]
   resource_group_name  = local.azurerm_resource_group
   virtual_network_name = azurerm_virtual_network.app-vnet.name
+  location = local.location
 
   depends_on = [
     azurerm_resource_group.app-rg,
-    azazurerm_virtual_network.app-vnet
+    azurerm_virtual_network.app-vnet
   ]
 }
 
@@ -67,7 +68,7 @@ resource "azurerm_network_interface" "vm-nic" {
 
 resource "azurerm_network_security_group" "az-nsg" {
   name                = "az-nsg"
-  resource_group_name = local.resource_group_name
+  resource_group_name = local.azurerm_resource_group
   location            = local.location
 
   security_rule {
@@ -83,7 +84,7 @@ resource "azurerm_network_security_group" "az-nsg" {
 
   }
   depends_on = [
-    azurerm_resource_group.app-grp
+    azurerm_resource_group.app-rg
   ]
 }
 
