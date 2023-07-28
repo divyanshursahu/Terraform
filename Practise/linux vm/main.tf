@@ -17,7 +17,7 @@ locals {
   location               = "West Europe"
   subnets = {
     name = "subnetA"
-    address_space = "10.0.0.0/24" }
+  address_space = "10.0.0.0/24" }
 }
 
 resource "azurerm_resource_group" "app-rg" {
@@ -40,7 +40,7 @@ resource "azurerm_subnet" "app-subnet" {
   name                 = local.subnets.name
   resource_group_name  = local.azurerm_resource_group
   virtual_network_name = azurerm_virtual_network.app-vnet.name
-  address_prefixes = [ local.subnets.address_space ]
+  address_prefixes     = [local.subnets.address_space]
 
   depends_on = [
     azurerm_resource_group.app-rg,
@@ -94,12 +94,12 @@ resource "azurerm_subnet_network_security_group_association" "asso" {
 
 resource "tls_private_key" "pkey" {
   algorithm = "RSA"
-  rsa_bits = 4096
+  rsa_bits  = 4096
 }
 
 resource "local_file" "pkey-file" {
   filename = "private_key.pem"
-  content = tls_private_key.pkey.private_key_pem
+  content  = tls_private_key.pkey.private_key_pem
 }
 
 resource "azurerm_linux_virtual_machine" "app-vm" {
@@ -115,6 +115,11 @@ resource "azurerm_linux_virtual_machine" "app-vm" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
+  }
+
+  admin_ssh_key {
+    username   = "azuser"
+    public_key = tls_private_key.pkey.public_key_openssh
   }
 
   source_image_reference {
