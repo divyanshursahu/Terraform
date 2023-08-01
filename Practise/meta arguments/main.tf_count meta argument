@@ -23,8 +23,8 @@ resource "azurerm_resource_group" "app-rg" {
 }
 
 resource "azurerm_storage_account" "appstore566565637" {
-  #count                    = 2
-  name                     = "appstore566565637"
+  count                    = 2
+  name                     = "${count.index}appstore566565637"
   resource_group_name      = local.azurerm_resource_group
   location                 = local.location
   account_tier             = "Standard"
@@ -33,11 +33,4 @@ resource "azurerm_storage_account" "appstore566565637" {
   depends_on = [
     azurerm_resource_group.app-rg
   ]
-}
-
-resource "azurerm_storage_container" "storage-blob" {
-  for_each = toset([ "data", "files" ])
-  name = each.key
-  storage_account_name = azurerm_storage_account.appstore566565637.name
-  container_access_type = "blob"
 }
