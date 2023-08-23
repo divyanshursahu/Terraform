@@ -15,6 +15,7 @@ provider "azurerm" {
 locals {
   azurerm_resource_group = "app-rg"
   location               = "West Europe"
+  index = 1
 }
 
 resource "azurerm_resource_group" "app-rg" {
@@ -22,9 +23,10 @@ resource "azurerm_resource_group" "app-rg" {
   location = local.location
 }
 
+
 resource "azurerm_storage_account" "appstore566565637" {
-  count                    = 2
-  name                     = "${count.index}appstore566565637"
+  count                    = 3
+  name                     = "${count.index + 1}appstore566565637"
   resource_group_name      = local.azurerm_resource_group
   location                 = local.location
   account_tier             = "Standard"
